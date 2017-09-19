@@ -16,7 +16,7 @@ class MascotMain
     @config.save_json("./tmp/config.json")
     @google_drive = MyGoogleDrive.new("./tmp/config.json")
     utc_time = Time.now
-    time = utc_time + (60*60*9)
+    time = utc_time + (60*60*8)
     y_time = time - (60*60*24)
     @month = time.month
     @day = time.day
@@ -26,7 +26,7 @@ class MascotMain
 
   def collection
     res = "id,#{@month.to_s}/#{@day.to_s}\n"
-    for i in 1..50 do
+    for i in 1..54 do
       begin
         mascot = Mascot.new(i)
         id = mascot.get_id
