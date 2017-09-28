@@ -111,20 +111,21 @@ class MascotMain
 
   def run
     self.save_csv(self.collection)
-    puts("save done")
+    puts("save done #{file_name_mascot}")
     file_name_mascot = self.make_file_name("mascot", 0)
     file_path_mascot = "./tmp/#{file_name_mascot}"
     @google_drive.file_upload(file_path_mascot, file_name_mascot, "mascot")
-    puts("upload done")
+    puts("upload done #{file_name_mascot}")
     file_name_master = self.make_file_name("master", 1)
     file_path_master = "./tmp/#{file_name_master}"
     @google_drive.file_export(file_path_master, file_name_master)
-    puts("download done")
+    puts("download done #{file_name_master}")
     file_name_merge = self.make_file_name("master", 0)
     file_path_merge = "./tmp/#{file_name_merge}"
     self.merge_save_csv(file_path_merge, file_path_master, file_path_mascot)
-    puts("merge done")
+    puts("merge done #{file_name_merge}")
     @google_drive.file_upload(file_path_merge, file_name_merge, "mascot")
+    puts("upload done #{file_name_merge}")
     @config.delete_json("./tmp/config.json")
   end
 
