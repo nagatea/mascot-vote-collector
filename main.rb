@@ -21,12 +21,13 @@ class MascotMain
     @month = time.month
     @day = time.day
     @y_month = y_time.month
-    @y_day = y_time.day 
+    @y_day = y_time.day
+    @all_id = 55
   end
 
   def collection
     res = "id,#{@month.to_s}/#{@day.to_s}\n"
-    for i in 1..54 do
+    for i in 1..@all_id do
       begin
         mascot = Mascot.new(i)
         id = mascot.get_id
