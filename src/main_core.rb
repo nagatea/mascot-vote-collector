@@ -162,9 +162,3 @@ class MascotMain
   end
 
 end
-
-runer = MascotMain.new()
-
-runer.run
-
-
