@@ -25,6 +25,29 @@ class MascotMain
     @all_id = 55
   end
 
+  def pre_collection
+    res = "id,name,admin\n"
+    for i in 1..@all_id do
+      begin
+        mascot = Mascot.new(i)
+        id = mascot.get_id
+        name = mascot.get_name
+        admin = mascot.get_admin
+        vote = mascot.get_vote
+        res = res << "#{id},#{name},#{admin}\n"
+        puts(id)
+        puts(name)
+        puts(admin)
+        puts(vote)
+        puts("-----")
+        sleep(1)
+      rescue => exception
+      end
+    end
+    puts(res)
+    return res
+  end
+
   def collection
     res = "id,#{@month.to_s}/#{@day.to_s}\n"
     for i in 1..@all_id do
@@ -108,11 +131,19 @@ class MascotMain
     return CSV.parse(open(target_file_name, headers: true).read)
   end
 
-
+  def preparation
+    self.save_csv(self.pre_collection)
+    puts("save done")
+    file_name_mascot = self.make_file_name("mascot", 0)
+    file_path_mascot = "./tmp/#{file_name_mascot}"
+    @google_drive.file_upload(file_path_mascot, file_name_mascot, "mascot")
+    puts("upload done #{file_name_mascot}")
+    @config.delete_json("./tmp/config.json")
+  end
 
   def run
     self.save_csv(self.collection)
-    puts("save done #{file_name_mascot}")
+    puts("save done")
     file_name_mascot = self.make_file_name("mascot", 0)
     file_path_mascot = "./tmp/#{file_name_mascot}"
     @google_drive.file_upload(file_path_mascot, file_name_mascot, "mascot")
