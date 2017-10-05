@@ -2,9 +2,9 @@ require 'open-uri'
 require 'mechanize'
 require 'csv'
 
-require "./mascot.rb"
-require "./google_drive.rb"
-require "./create_config.rb"
+require "./src/mascot.rb"
+require "./src/google_drive.rb"
+require "./src/create_config.rb"
 
 Encoding.default_external = 'utf-8'
 
